@@ -1,5 +1,5 @@
-export const allProductsDummy = async () => {
+export const todosOsProdutos = async () => {
   const endPoint = `https://fakestoreapi.com/products`;
-  const products = await (await fetch(endPoint)).json();
-  return products;
+  const produtos = await (await fetch(endPoint)).json();
+  return produtos;
 };

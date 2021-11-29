@@ -1,0 +1,11 @@
+.cartBuy {
+  align-items: center;
+  display: flex;
+  font-size: large;
+}
+
+.icon-cart {
+  color: rgb(13, 89, 204);
+  height: 25px;
+  margin-right: 10px;
+}

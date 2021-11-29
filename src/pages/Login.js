@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Figure, Form } from 'react-bootstrap';
+import '../styles/Login.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGifts } from '@fortawesome/free-solid-svg-icons';
 
 function Login(props) {
   const INITIAL_LOGIN = {
@@ -19,21 +22,25 @@ function Login(props) {
 
   // funcao para capturar ação de click e salvar dados do user no localStorage
   const handleClick = () => {
-    const user = { email: login.email };
-    localStorage.setItem('user', JSON.stringify(user));
     const { history } = props;
+    const user = { email: login.email };
+    const usuario = JSON.parse(localStorage.getItem('user'));
+    if (usuario.email !== login.email) {
+      return history.push('/cadastrar')
+    }
+    localStorage.setItem('login', JSON.stringify(user));
     // será enviado para a tela de produtos
-    history.push('/produtos');
+    return history.push('/produtos');
   };
 
   const imageLogin = () => {
     return(
       <Figure>
         <Figure.Image
-          width={171}
-          height={180}
-          alt="171x180"
-          src="https://previews.123rf.com/images/mustique/mustique1608/mustique160800048/64300111-dibujos-animados-ilustraci%C3%B3n-vectorial-de-una-mujer-de-moda-joven-con-bolsas-de-la-compra-aislados-e.jpg"
+          width={700}
+          height={500}
+          alt="636x500"
+          src="https://i.pinimg.com/736x/0c/82/79/0c8279ae600f5aca424e5a4bb434f574.jpg"
         />
       </Figure>
     );
@@ -41,14 +48,14 @@ function Login(props) {
 
   const inputsLogin = () => {
     return (
-      <Form className="">
-        <h1>Seja bem vindo</h1>
+      <Form className="form-login">
+        <h2>Seja bem vindo!</h2>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email:</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control
+            className="input-email"
             size="lg"
             type="email"
-            placeholder="Enter email"
             name="email"
             value={ login.email }
             onChange={ handleChange }
@@ -57,26 +64,26 @@ function Login(props) {
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>Senha:</Form.Label>
+          <Form.Label>Senha</Form.Label>
           <Form.Control
+            className="input-senha"
             size="lg"
             type="password"
             name="password"
             value={ login.password }
             onChange={ handleChange }
-            placeholder="Senha"
           />
         </Form.Group>
         <Button
-          variant="success"
+          variant="primary"
           type="button"
           disabled={ isDisabled }
           onClick={ handleClick }
-          // className={  }
+          className="btn-login"
         >
           Entrar
         </Button>
-        <Form.Text>
+        <Form.Text className="text-center">
           Ainda não possui cadastro?
         <Link to="/cadastrar">Cadastre-se</Link>
         </Form.Text>
@@ -102,9 +109,19 @@ function Login(props) {
   }, [login]);
 
   return (
-    <div className="login">
-      { imageLogin() }
-      { inputsLogin() }
+    <div>
+      <div className="icon-content m-4 px-4">
+        <FontAwesomeIcon className="icon-logo" icon={ faGifts } />
+        <span>Arkos Prod</span>
+      </div>
+      <div className="login">
+        <div className="imagem-login">
+          { imageLogin() }
+        </div>
+        <div className="card-login">
+          { inputsLogin() }
+        </div>
+      </div>
     </div>
   );
 }

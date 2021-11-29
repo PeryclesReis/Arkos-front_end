@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Perfil from './pages/Perfil';
 import Produtos from './pages/Produtos';
 import ProviderProdutos from './provider/ProviderProdutos';
+import './App.css';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route path="/cadastrar" component={ Cadastro } />
         <Route path="/produtos" component={ Produtos } />
-        <Route path="/carrinho" component={ Carrinho } />
+        <Route path="/carrinho" component={ Carrinho }/>
         <Route path="/perfil" component={ Perfil } />
       </Switch>
     </ProviderProdutos>

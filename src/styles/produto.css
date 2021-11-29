@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+}
+
+.produto {
+  align-items: center;
+  border: solid 1px gainsboro;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 15px;
+  padding: 3px;
+  width: 20%;
+}
+
+.produto .btn {
+  align-items: center;
+  border-radius: 20px;
+  color: aliceblue;
+  display: flex;
+  font-size: x-large;
+  font-weight: 400;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 4px 0;
+  width: 60%;
+}
+
+.icon-cart-btn{
+  margin-right: 15px;
+}
+
+.image {
+  width: 90%;
+}
+
+.rating {
+  display: flex;
+}
+
+.rating p {
+  color: gainsboro;
+  margin-left: 5px;
+}
+
+.descricao-content {
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  font-weight: 500;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding: 10px 20px;
+  text-align: left;
+  width: 100%;
+}
+
+.descricao {
+  font-weight: 300;
+  font-size: medium;
+  text-align: left;
+}
