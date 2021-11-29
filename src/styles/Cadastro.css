@@ -1,0 +1,43 @@
+.cadastro {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+}
+
+.input-email, .input-senha {
+  border-radius: 10px;
+}
+
+.imagem-cadastro {
+
+}
+
+.card-cadastro {
+  width: 50%;
+}
+
+.form-cadastro {
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  box-shadow: 2px 6px 6px gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 700px;
+  margin: 30px auto;
+  padding: 30px;
+  width: 50%;
+}
+
+.form-cadastro h2 {
+  font-weight: 900;
+  margin: 20px 0 70px;
+  text-align: center;
+}
+
+.btn-cadastro {
+  border-radius: 10px;
+  margin: 0 20%;
+  padding: 10px 0;
+}

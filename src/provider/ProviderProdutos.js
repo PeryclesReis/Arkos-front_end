@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import ContextBebidas from './ContextProdutos';
-import { allProductsDummy } from '../services/apiDummysProducts';
+import { todosOsProdutos } from '../services/apiDummysProducts';
 
 const ProviderProdutos = ({ children }) => {
-  const [originData, setOrigindata] = useState([]);
   const [produtos, setProdutos] = useState('');
 
-  const fetchapi = async () => {
-    const products = await allProductsDummy();
+  const todosProdutos = async () => {
+    const products = await todosOsProdutos();
     setProdutos(products);
   };
 
   useEffect(() => {
-    fetchapi();
+    todosProdutos();
   }, []);
 
   const context = {

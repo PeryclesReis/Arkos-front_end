@@ -1,0 +1,23 @@
+.header {
+  margin: 10px;
+  padding: 5px 10px;
+}
+
+.logo-cart {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px 50px 20px;
+}
+
+.icon-content span {
+  color: rgb(13, 89, 204);
+  font-size: xx-large;
+  font-weight: bolder;
+}
+
+.icon-logo {
+  color: rgb(13, 89, 204);
+  margin-right: 15px;
+  height: 50px;
+}
