@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import ContextProdutos from '../provider/ContextProdutos';
@@ -7,11 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import '../styles/produto.css';
 
-function Produtos(props) {
+function Produtos() {
   const { produtos } = useContext(ContextProdutos);
-
-  useEffect(() => {
-  }, []);
 
   const handleClick = (produto) => {
     const item = [{ produto }];

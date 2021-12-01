@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { produtoPorId } from '../services/apiProductId.js';
+// import { produtoPorId } from '../services/apiProductId.js';
 import Loading from '../components/Loading.jsx';
 import Header from '../components/Header';
 import Rating from '../components/Rating';

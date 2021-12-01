@@ -4,6 +4,7 @@ import { Button, Figure, Form } from 'react-bootstrap';
 import '../styles/Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGifts } from '@fortawesome/free-solid-svg-icons';
+import { apiLogin } from '../services/apiBackEnd';
 
 function Login(props) {
   const INITIAL_LOGIN = {
@@ -13,6 +14,10 @@ function Login(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [login, setLogin] = useState(INITIAL_LOGIN);
 
+  const fetchApi = (email, password) => {
+    return apiLogin().then(({data}) => data);
+  };
+
   const handleChange = ({ target: { name, value } }) => {
     setLogin({
       ...login,
@@ -20,17 +25,18 @@ function Login(props) {
     });
   };
 
-  // funcao para capturar ação de click e salvar dados do user no localStorage
+  // funcao para capturar ação de click e salvar dados do usuario no localStorage
   const handleClick = () => {
     const { history } = props;
     const user = { email: login.email };
     const usuario = JSON.parse(localStorage.getItem('user'));
     if (usuario.email !== login.email) {
-      return history.push('/cadastrar')
+      // return history.push('/cadastrar');
     }
     localStorage.setItem('login', JSON.stringify(user));
+    const test = fetchApi(login.email, login.password);
     // será enviado para a tela de produtos
-    return history.push('/produtos');
+    // return history.push('/produtos');
   };
 
   const imageLogin = () => {

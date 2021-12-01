@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Figure, Form } from 'react-bootstrap';
-import '../styles/Cadastro.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGifts } from '@fortawesome/free-solid-svg-icons';
+import { apiCadastrar } from '../services/apiBackEnd';
+import '../styles/Cadastro.css';
 
 const Cadastro = (props) => {
   const INITIAL_LOGIN = {
@@ -15,6 +16,10 @@ const Cadastro = (props) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [login, setLogin] = useState(INITIAL_LOGIN);
 
+  const fetchApi = (nome, email, password) => {
+    return apiCadastrar(nome, email, password).then(({data}) => data);
+  };
+
   const handleChange = async ({ target: { name, value } }) => {
     setLogin({
       ...login,
@@ -23,15 +28,19 @@ const Cadastro = (props) => {
   };
 
   // funcao para capturar ação de click e salvar dados do user no localStorage
-  const handleClick = () => {
+  const handleClick = async () => {
     const user = {
       nome: login.nome,
       email: login.email,
     };
     localStorage.setItem('user', JSON.stringify(user));
-    const { history } = props;
-    // será enviado para a tela de produtos
-    history.push('/');
+    const message = await fetchApi(login.nome, login.email, login.password);
+    if(message === 'Usuário cadastrado com sucesso!') {
+      const { history } = props;
+    // // será enviado para a tela de produtos
+      alert(message);
+      return history.push('/');
+    }
   };
 
   const imageLogin = () => {
@@ -51,7 +60,7 @@ const Cadastro = (props) => {
     return (
       <Form className="form-cadastro">
         <h2>Cadastre-se</h2>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group controlId="formBasicName">
           <Form.Label>Nome completo</Form.Label>
           <Form.Control
             className="input-email"
@@ -107,7 +116,7 @@ const Cadastro = (props) => {
           onClick={ handleClick }
           className="btn-cadastro"
         >
-          Entrar
+          Cadastrar
         </Button>
         <Form.Text className="text-center">
           Já possuo cadastro!
