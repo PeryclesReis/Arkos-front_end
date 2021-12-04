@@ -9,3 +9,7 @@
   height: 25px;
   margin-right: 10px;
 }
+
+.cartBuy span {
+  display: flex;
+}
