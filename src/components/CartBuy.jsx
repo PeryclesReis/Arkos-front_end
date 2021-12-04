@@ -9,14 +9,12 @@ const CartBuy = () => {
 
   useEffect(() => {
     const nome = JSON.parse(localStorage.getItem('user'));
-    const login = JSON.parse(localStorage.getItem('login'));
-    if (!nome || !login) {
+
+    if (!nome) {
       return setUsuario('Usuário');
     }
-    if (nome.email === login.email) {
-      return setUsuario(nome.nome)
-    }
-  }, []);
+    return setUsuario(nome)
+  }, [usuario]);
 
   return (
     <div className="cartBuy d-flex">

@@ -2,75 +2,117 @@ import React, { useEffect, useState } from 'react';
 import { faGifts } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Form } from 'react-bootstrap';
+import { apiAtualizaUsuario } from '../services/apiBackEnd';
 import "../styles/Perfil.css"
 
-function Perfil() {
-  const INITIAL_LOGIN = {
-    nome: '',
-    email: '',
+function Perfil(props) {
+  const INITIAL_USUARIO = {
+    nomeAntigo: '',
+    emailAntigo: '',
+    novoNome: '',
     novoEmail: '',
+    novaSenha: '',
   };
   const [isDisabled, setIsDisabled] = useState(true);
-  const [login, setLogin] = useState(INITIAL_LOGIN);
+  const [usuario, setUsuario] = useState(INITIAL_USUARIO);
+
+  useEffect(() => {
+    const { history } = props;
+
+    const token = JSON.parse(localStorage.getItem('token'));
+    if (!token) {
+      history.push('/');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const fetchApi = async (dados) => {
+    return await apiAtualizaUsuario(dados).then(({data}) => data);
+  };
 
   const handleChange = async ({ target: { name, value } }) => {
-    setLogin({
-      ...login,
+    setUsuario({
+      ...usuario,
       [name]: value,
     });
   };
 
-   // funcao para capturar ação de click e salvar dados do user no localStorage
-   const handleClick = () => {
-    // const user = {
-    //   nome: login.nome,
-    //   email: login.email,
-    // };
-    // localStorage.setItem('user', JSON.stringify(user));
-    // const { history } = props;
-    // será enviado para a tela de produtos
-    // history.push('/');
+   const handleClick = async () => {
+    const { history } = props;
+
+    const res = await fetchApi(usuario);
+    if(res.code) {
+      return alert(res.message);
+    }
+
+    alert(res.message);
+    return history.push('/');
   };
 
   const inputsLogin = () => {
     return (
       <Form className="form-edita">
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Nome completo</Form.Label>
+        <Form.Group>
+          <Form.Label>Nome antigo</Form.Label>
           <Form.Control
             className="input-email"
             size="lg"
             type="nome"
-            name="nome"
-            value={ login.nome }
+            name="nomeAntigo"
+            value={ usuario.nomeAntigo }
             onChange={ handleChange }
             autoComplete="off"
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
+        <Form.Group>
+          <Form.Label>Email antigo</Form.Label>
           <Form.Control
             className="input-email"
             size="lg"
             type="email"
-            name="email"
-            value={ login.email }
+            name="emailAntigo"
+            value={ usuario.emailAntigo }
             onChange={ handleChange }
             autoComplete="off"
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Novo email</Form.Label>
+        <Form.Group>
+          <Form.Label>Nome novo</Form.Label>
+          <Form.Control
+            className="input-email"
+            size="lg"
+            type="nome"
+            name="novoNome"
+            value={ usuario.novoNome }
+            onChange={ handleChange }
+            autoComplete="off"
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label>Email novo</Form.Label>
           <Form.Control
             className="input-email"
             size="lg"
             type="email"
             name="novoEmail"
-            value={ login.email }
+            value={ usuario.novoEmail }
             onChange={ handleChange }
             autoComplete="off"
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label>Senha</Form.Label>
+          <Form.Control
+            className="input-senha"
+            size="lg"
+            type="password"
+            name="novaSenha"
+            value={ usuario.novaSenha }
+            onChange={ handleChange }
           />
         </Form.Group>
 
@@ -87,15 +129,15 @@ function Perfil() {
     );
   }
 
-
   useEffect(() => {
     const inputsVerify = () => {
-      const { nome, email, password } = login;
-      if (typeof nome === 'string' && nome.length > 10 ) {
+      const { novoNome, novoEmail, novaSenha } = usuario;
+
+      if (typeof novoNome === 'string' && novoNome.length > 10 ) {
         // modelo que o regex de email verifica exemplo@exemplo.exemplo
         const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-        const passwordRegex = new RegExp(/[\w\D]{7}/g);
-        if (emailRegex.test(email) && passwordRegex.test(password)) {
+        const passwordRegex = new RegExp(/[\w\D]{8}/g);
+        if (emailRegex.test(novoEmail) && passwordRegex.test(novaSenha)) {
           return setIsDisabled(false);
         }
         return setIsDisabled(true);
@@ -104,7 +146,7 @@ function Perfil() {
     };
 
     inputsVerify();
-  }, [login]);
+  }, [usuario]);
 
   return (
     <div>

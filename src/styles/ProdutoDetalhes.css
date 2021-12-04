@@ -1,0 +1,60 @@
+.main-principal {
+  display: flex;
+  margin: auto;
+  padding-top: 80px;
+  width: 80%;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.content-card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 30px;
+  width: 80%;
+}
+
+.image-detalhes {
+  height: 500px;
+  margin: 0 30px;
+  width: 20%;
+}
+
+.rating-detalhes {
+  display: flex;
+}
+
+.rating-detalhes p {
+  color: rgb(194, 194, 194);
+  margin: 0 10px;
+}
+
+.descricao {
+  width: 70%;
+}
+
+.descricao h3 {
+  margin: 20px 0;
+}
+
+.botao {
+  background-color: #0b5ed7;
+  border: none;
+  border-radius: 20px;
+  color: aliceblue;
+  font-size: x-large;
+  font-weight: 900;
+  margin: 50px;
+  padding: 5px;
+  text-align: center;
+  width: 400px;
+}
+
+.icon-cart-botao {
+  margin-right: 10px;
+}

@@ -6,7 +6,7 @@ import { faGifts } from '@fortawesome/free-solid-svg-icons';
 import { apiCadastrar } from '../services/apiBackEnd';
 import '../styles/Cadastro.css';
 
-const Cadastro = (props) => {
+function Cadastro (props) {
   const INITIAL_LOGIN = {
     nome: '',
     email: '',
@@ -16,7 +16,7 @@ const Cadastro = (props) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [login, setLogin] = useState(INITIAL_LOGIN);
 
-  const fetchApi = (nome, email, password) => {
+  const fetchApi = async (nome, email, password) => {
     return apiCadastrar(nome, email, password).then(({data}) => data);
   };
 
@@ -27,20 +27,16 @@ const Cadastro = (props) => {
     });
   };
 
-  // funcao para capturar ação de click e salvar dados do user no localStorage
   const handleClick = async () => {
-    const user = {
-      nome: login.nome,
-      email: login.email,
-    };
-    localStorage.setItem('user', JSON.stringify(user));
-    const message = await fetchApi(login.nome, login.email, login.password);
-    if(message === 'Usuário cadastrado com sucesso!') {
-      const { history } = props;
-    // // será enviado para a tela de produtos
-      alert(message);
-      return history.push('/');
+    const { nome, email, password } = login;
+    const { history } = props;
+
+    const res= await fetchApi(nome, email, password);
+    if(res.code) {
+      return alert(res.message);
     }
+    alert(res.message);
+    return history.push('/');
   };
 
   const imageLogin = () => {

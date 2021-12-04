@@ -6,17 +6,19 @@ import Login from './pages/Login';
 import Perfil from './pages/Perfil';
 import Produtos from './pages/Produtos';
 import ProviderProdutos from './provider/ProviderProdutos';
+import ProdutoDetalhes from './pages/ProdutoDetalhes';
 import './App.css';
 
 function App() {
   return (
     <ProviderProdutos>
       <Switch >
-        <Route exact path="/" component={ Login } />
         <Route path="/cadastrar" component={ Cadastro } />
-        <Route path="/produtos" component={ Produtos } />
         <Route path="/carrinho" component={ Carrinho }/>
+        <Route path="/produto/detalhes/:id" component={ ProdutoDetalhes } />
+        <Route path="/produtos" component={ Produtos } />
         <Route path="/perfil" component={ Perfil } />
+        <Route exact path="/" component={ Login } />
       </Switch>
     </ProviderProdutos>
   );

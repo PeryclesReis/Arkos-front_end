@@ -32,7 +32,7 @@ function Header({ carProps }) {
         </div>
         <CartBuy />
       </div>
-      { !carProps ? form() : null }
+      {/* { !carProps ? form() : null } */}
     </div>
   );
 }

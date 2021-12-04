@@ -1,27 +1,41 @@
 import axios from 'axios';
 
-// const apiLogin = axios({
-//   method: 'get',
-//   url: 'http://localhost:8000/api/login'
-// })
-//   .then(res => {
-//     return res
-//   });
+export const apiLogin = async (email, senha) => axios({
+  method: 'post',
+  url: 'http://localhost:3004/api/login',
+  data: {
+    email,
+    senha
+  }
+})
+  .then(res => res)
+  .catch(error => error.response);
 
-const apiCadastrar = (nome, email, senha) => (
-  axios.post('http://localhost:8000/api/cadastrar', {nome, email, senha})
-  );
+export const apiCadastrar = async (nome, email, senha) => axios({
+  method: 'post',
+  url: 'http://localhost:3004/api/cadastrar',
+  data: {
+    nome,
+    email,
+    senha
+  }
+})
+  .then(res => res)
+  .catch(error => error.response);
 
-const apiLogin = (email, senha) => (
-  axios.get('http://localhost:8000/api/login', {email, senha})
-  );
+export const apiAtualizaUsuario = async (dados) => axios({
+  method: 'put',
+  url: 'http://localhost:3004/api/perfil',
+  data: {
+    dados
+  }
+})
+  .then(res => res)
+  .catch(error => error.response);
 
-const apiAtualizaUsuario = (nome, email, senha) => (
-  axios.get('http://localhost:8000/api/perfil', {nome, email, senha})
-  );
-
-export {
-  apiCadastrar,
-  apiLogin,
-  apiAtualizaUsuario
-};
+export const apiProdutos = async () => axios({
+  method: 'get',
+  url: 'http://localhost:3004/api/produtos',
+})
+  .then(res => res)
+  .catch(error => error.response);

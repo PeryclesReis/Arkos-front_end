@@ -33,7 +33,8 @@ body {
 }
 
 .image {
-  width: 90%;
+  height: 300px;
+  width: 60%;
 }
 
 .rating {

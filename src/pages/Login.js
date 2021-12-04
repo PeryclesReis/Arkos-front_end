@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Figure, Form } from 'react-bootstrap';
-import '../styles/Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGifts } from '@fortawesome/free-solid-svg-icons';
 import { apiLogin } from '../services/apiBackEnd';
+import '../styles/Login.css';
 
 function Login(props) {
   const INITIAL_LOGIN = {
@@ -14,9 +14,13 @@ function Login(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [login, setLogin] = useState(INITIAL_LOGIN);
 
-  const fetchApi = (email, password) => {
-    return apiLogin().then(({data}) => data);
-  };
+  useEffect(() => {
+    localStorage.clear();
+  }, [])
+
+  const fetchApi = async (email, password) => {
+    return apiLogin(email, password).then(({data}) => data);
+  }
 
   const handleChange = ({ target: { name, value } }) => {
     setLogin({
@@ -25,18 +29,18 @@ function Login(props) {
     });
   };
 
-  // funcao para capturar ação de click e salvar dados do usuario no localStorage
-  const handleClick = () => {
+  const handleClick = async () => {
     const { history } = props;
-    const user = { email: login.email };
-    const usuario = JSON.parse(localStorage.getItem('user'));
-    if (usuario.email !== login.email) {
-      // return history.push('/cadastrar');
+    const { email, password } = login;
+
+    const res = await fetchApi(email, password);
+
+    if (res.code) {
+      return history.push('/cadastrar');
     }
-    localStorage.setItem('login', JSON.stringify(user));
-    const test = fetchApi(login.email, login.password);
-    // será enviado para a tela de produtos
-    // return history.push('/produtos');
+    localStorage.setItem('token', JSON.stringify(res.token));
+    localStorage.setItem('user', JSON.stringify(res.usuario.nome));
+    return history.push('/produtos');
   };
 
   const imageLogin = () => {
@@ -97,21 +101,21 @@ function Login(props) {
     );
   }
 
-  const inputsVerify = () => {
-    const { email, password } = login;
-    // modelo que o regex de email verifica exemplo@exemplo.exemplo
-    const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-    const passwordRegex = new RegExp(/[\w\D]{7}/g);
-    if (emailRegex.test(email) && passwordRegex.test(password)) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
-  };
 
   useEffect(() => {
+    const inputsVerify = () => {
+      const { email, password } = login;
+      // modelo que o regex de email verifica exemplo@exemplo.exemplo
+      const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+      const passwordRegex = new RegExp(/[\w\D]{7}/g);
+      if (emailRegex.test(email) && passwordRegex.test(password)) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    };
+
     inputsVerify();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [login]);
 
   return (

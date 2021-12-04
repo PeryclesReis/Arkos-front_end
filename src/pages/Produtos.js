@@ -1,14 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import ContextProdutos from '../provider/ContextProdutos';
+import { Link } from 'react-router-dom';
 import Rating from '../components/Rating';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import '../styles/produto.css';
 
-function Produtos() {
+function Produtos(props) {
   const { produtos } = useContext(ContextProdutos);
+
+  useEffect(() => {
+    const { history } = props;
+
+    const token = JSON.parse(localStorage.getItem('token'));
+    if (!token) {
+      history.push('/');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClick = (produto) => {
     const item = [{ produto }];
@@ -36,16 +47,16 @@ function Produtos() {
       <div className="produto" key={ produto.id }>
         <img className="image" src={ produto.image } alt="produtos" />
         <div className="descricao-content">
-          <p>{ produto.title }</p>
           <div className="rating">
             <Rating rate={ produto.rating.rate }/>
             <p> {`(${ produto.rating.count })`} </p>
           </div>
-          <div className="descricao">
-            <p>{ produto.description }</p>
-          </div>
+          <p>{ produto.title }</p>
         </div>
         { btn(produto) }
+        <Link to={`/produto/detalhes/${produto.id}`} key={ produto.id }>
+          Mais detalhes
+        </ Link>
       </div>
     ))
   }

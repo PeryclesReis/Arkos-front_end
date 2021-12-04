@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { produtoPorId } from '../services/apiProductId.js';
 import Loading from '../components/Loading.jsx';
 import Header from '../components/Header';
 import Rating from '../components/Rating';
@@ -8,7 +7,7 @@ import '../styles/Carrinho.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
-function Carrinho() {
+function Carrinho(props) {
   const [produtos, setProduto] = useState([]);
 
   const fetchApi = () => {
@@ -17,7 +16,14 @@ function Carrinho() {
   }
 
   useEffect(() => {
+    const { history } = props;
+
+    const token = JSON.parse(localStorage.getItem('token'));
+    if (!token) {
+      history.push('/');
+    }
     fetchApi();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClick = () => {
