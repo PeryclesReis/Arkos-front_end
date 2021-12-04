@@ -16,7 +16,7 @@
 
 ## Sobre
 
-Este projeto foi criado com o intuíto de fazer integração com o back-end do app Arkos Store.
+Este projeto foi criado com o intuíto de fazer integração com o back-end do app Arkos Store, vale ressaltar que o front-end foi feito para consumir o back-end, logo, se rodar o front-end sem o back-end pode haver mau funcionamento da aplicação.
 
 ---
 <a id="comousar"></a>
