@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { faGifts } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faGifts } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Form } from 'react-bootstrap';
 import { apiAtualizaUsuario } from '../services/apiBackEnd';
 import Header from './Header';

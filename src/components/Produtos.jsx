@@ -44,7 +44,9 @@ function ProdutosComp({ props }) {
   const listaProdutos = () => {
     return produtos.map((produto) => (
       <div className="produto" key={ produto.id }>
-        <img className="image" src={ produto.image } alt="produtos" />
+        <div className='image-container'>
+          <img className="image" src={ produto.image } alt="produtos" />
+        </div>
         <div className="descricao-content">
           <div className="rating">
             <Rating rate={ produto.rating.rate }/>
@@ -61,13 +63,12 @@ function ProdutosComp({ props }) {
   }
 
   return (
-    <div className="produtos">
-      <Header />
+    <div className='produtos'>
+      <Header props='true' />
       {
         produtos.length < 1 ?
         <Loading /> :
         <div>
-          <h1 className="m-5">Produtos</h1>
           <div className="d-flex flex-wrap m-1 justify-content-evenly w-100">
             { listaProdutos() }
           </div>

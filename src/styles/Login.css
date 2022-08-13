@@ -3,18 +3,20 @@
   display: flex;
   justify-content: center;
   height: 80vh;
-}
-
-.input-email, .input-senha {
-  border-radius: 10px;
+  width: 100%;
 }
 
 .imagem-login {
-
+  display: flex;
+  justify-content: center;
+  width: 50%;
 }
 
 .card-login {
-  width: 50%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-width: 900px;
 }
 
 .form-login {
@@ -24,20 +26,35 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 600px;
-  margin: 30px auto;
+  height: 500px;
   padding: 30px;
   width: 50%;
 }
 
 .form-login h2 {
   font-weight: 900;
-  margin: 20px 0 70px;
+  margin-top: 20px;
   text-align: center;
+}
+
+.input-email, .input-senha {
+  border-radius: 10px;
+  text-align: center;
+}
+
+.form-label {
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .btn-login {
   border-radius: 10px;
   margin: 0 20%;
   padding: 10px 0;
+}
+
+@media (max-width: 1424px) {
+  .imagem-login {
+    display: none;
+  }
 }

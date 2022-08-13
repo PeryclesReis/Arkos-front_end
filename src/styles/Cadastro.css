@@ -3,18 +3,20 @@
   display: flex;
   justify-content: center;
   height: 80vh;
-}
-
-.input-email, .input-senha {
-  border-radius: 10px;
+  width: 100%;
 }
 
 .imagem-cadastro {
-
+  display: flex;
+  justify-content: center;
+  width: 50%;
 }
 
 .card-cadastro {
-  width: 50%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-width: 900px;
 }
 
 .form-cadastro {
@@ -25,19 +27,29 @@
   flex-direction: column;
   justify-content: space-between;
   height: 700px;
-  margin: 30px auto;
   padding: 30px;
   width: 50%;
 }
 
 .form-cadastro h2 {
   font-weight: 900;
-  margin: 20px 0 70px;
+  margin: 20px 0 50px;
+  text-align: center;
+}
+
+.input-email, .input-senha {
+  border-radius: 10px;
   text-align: center;
 }
 
 .btn-cadastro {
   border-radius: 10px;
-  margin: 0 20%;
+  margin: 20px 20%;
   padding: 10px 0;
+}
+
+@media (max-width: 1424px) {
+  .imagem-cadastro {
+    display: none;
+  }
 }

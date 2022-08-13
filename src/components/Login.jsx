@@ -59,30 +59,32 @@ function LoginComponent({ props }) {
     return (
       <Form className="form-login">
         <h2>Seja bem vindo!</h2>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            className="input-email"
-            size="lg"
-            type="email"
-            name="email"
-            value={ login.email }
-            onChange={ handleChange }
-            autoComplete="off"
-          />
-        </Form.Group>
+        <div className='forms-group'>
+          <Form.Group className="mb-4" controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              className="input-email"
+              size="lg"
+              type="email"
+              name="email"
+              value={ login.email }
+              onChange={ handleChange }
+              autoComplete="off"
+            />
+          </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Senha</Form.Label>
-          <Form.Control
-            className="input-senha"
-            size="lg"
-            type="password"
-            name="password"
-            value={ login.password }
-            onChange={ handleChange }
-          />
-        </Form.Group>
+          <Form.Group className="my-1" controlId="formBasicPassword">
+            <Form.Label>Senha</Form.Label>
+            <Form.Control
+              className="input-senha"
+              size="lg"
+              type="password"
+              name="password"
+              value={ login.password }
+              onChange={ handleChange }
+            />
+          </Form.Group>
+        </div>
         <Button
           variant="primary"
           type="button"

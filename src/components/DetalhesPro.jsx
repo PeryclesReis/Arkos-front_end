@@ -69,7 +69,7 @@ function DetalhesComp({ params }) {
 
   return (
     <>
-      <Header />
+      <Header props='true' />
       {
         !produto ?
         <Loading /> :

@@ -75,7 +75,7 @@ function CarrinhoComp({ props }) {
 
   return (
     <div className="carrinho">
-      <Header carProps={'carrinho'} />
+      <Header props='false' />
       <div>
         {
           !produtos ?
